@@ -1,3 +1,33 @@
 spring:
   application:
     name: messaging
+  # Database Configuration
+  datasource:
+    url: jdbc:postgresql://localhost:5432/playground_db
+    username: myuser
+    password: mysecretpassword
+    driver-class-name: org.postgresql.Driver
+  # JPA / Hibernate
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  # Kafka Connection
+  kafka:
+    bootstrap-servers: localhost:9092
+    # Consumer Configuration (Listening)
+    consumer:
+      group-id: playground-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    # Producer Configuration (Sending)
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+
+# Custom Playground Configs
+playground:
+  topic-name: playground-topic

@@ -3,7 +3,7 @@ package com.playground.messaging.service;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
-import com.playground.messaging.controller.dto.MessageRequest;
+import com.playground.messaging.domain.message.service.ProcessMessageService;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -17,12 +17,12 @@ import org.springframework.test.web.servlet.MockMvc;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class MessageServiceTest {
+class ProcessProduceMessageServiceTest {
   @Autowired
   private MockMvc mockMvc;
 
   @Autowired
-  private MessageService messageService;
+  private ProcessMessageService processMessageService;
 
   @Test
   void testRaceCondition() throws InterruptedException {
@@ -51,6 +51,6 @@ public class MessageServiceTest {
     executor.shutdown();
 
     // ASSERT: Should be exactly 100 now!
-    assertEquals(100, messageService.getMessageCount());
+    assertEquals(100, processMessageService.getMessageCount());
   }
 }

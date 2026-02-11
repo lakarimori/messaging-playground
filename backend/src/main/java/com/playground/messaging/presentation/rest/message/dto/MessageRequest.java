@@ -1,4 +1,4 @@
-package com.playground.messaging.controller.dto;
+package com.playground.messaging.presentation.rest.message.dto;
 
 public class MessageRequest {
   private final String sender;
